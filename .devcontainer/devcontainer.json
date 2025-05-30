@@ -1,0 +1,46 @@
+{
+  "name": "Events App Development",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers/features/dotnet:1": {
+      "version": "8.0"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "forwardPorts": [3000, 7071],
+  "portsAttributes": {
+    "3000": {
+      "label": "Frontend (Vue.js)",
+      "onAutoForward": "openBrowser"
+    },
+    "7071": {
+      "label": "Backend API (Azure Functions)",
+      "onAutoForward": "notify"
+    }
+  },
+  "postCreateCommand": "cd backend && cp local.settings.sample.json local.settings.json && dotnet restore && cd ../frontend/events-app && npm install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.vscode-dotnet-runtime",
+        "Vue.volar",
+        "Vue.vscode-typescript-vue-plugin",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-eslint",
+        "humao.rest-client",
+        "eamodio.gitlens",
+        "ms-vscode.vscode-docker",
+        "GitHub.copilot",
+        "GitHub.copilot-chat"
+      ],
+      "settings": {
+        "eslint.workingDirectories": ["frontend/events-app"],
+        "dotnet.defaultSolution": "backend/EventsApi.csproj"
+      }
+    }
+  }
+}

@@ -1,0 +1,102 @@
+# Events API Test Requests
+# Use this file with the REST Client extension in VS Code
+
+### Variables
+@baseUrl = http://localhost:7071/api
+@contentType = application/json
+
+### Health Check (Get all events - should return empty array initially)
+GET {{baseUrl}}/events
+Content-Type: {{contentType}}
+
+### Create a new event
+POST {{baseUrl}}/events
+Content-Type: {{contentType}}
+
+{
+  "name": "Tech Meetup",
+  "location": "Virtual Conference Room",
+  "date": "2024-12-15T00:00:00Z",
+  "startTime": "18:00:00"
+}
+
+### Create another event
+POST {{baseUrl}}/events
+Content-Type: {{contentType}}
+
+{
+  "name": "Vue.js Workshop",
+  "location": "Online",
+  "date": "2024-12-20T00:00:00Z",
+  "startTime": "14:00:00"
+}
+
+### Get all events (should now show created events)
+GET {{baseUrl}}/events
+Content-Type: {{contentType}}
+
+### Get events filtered by location
+GET {{baseUrl}}/events?location=online
+Content-Type: {{contentType}}
+
+### Get events filtered by date
+GET {{baseUrl}}/events?date=2024-12-15
+Content-Type: {{contentType}}
+
+### Get specific event by ID (replace 1 with actual ID from previous responses)
+GET {{baseUrl}}/events/1
+Content-Type: {{contentType}}
+
+### Update an event (replace 1 with actual ID)
+PUT {{baseUrl}}/events/1
+Content-Type: {{contentType}}
+
+{
+  "name": "Updated Tech Meetup",
+  "location": "Hybrid Event"
+}
+
+### Register for an event (replace 1 with actual ID)
+POST {{baseUrl}}/events/1/register
+Content-Type: {{contentType}}
+
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "pronouns": "he/him",
+  "optInForCommunication": true
+}
+
+### Register another person for the same event
+POST {{baseUrl}}/events/1/register
+Content-Type: {{contentType}}
+
+{
+  "name": "Jane Smith",
+  "email": "jane.smith@example.com",
+  "pronouns": "she/her",
+  "optInForCommunication": false
+}
+
+### Try to register the same email again (should fail with conflict)
+POST {{baseUrl}}/events/1/register
+Content-Type: {{contentType}}
+
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "pronouns": "he/him",
+  "optInForCommunication": true
+}
+
+### Get event details with registrations
+GET {{baseUrl}}/events/1
+Content-Type: {{contentType}}
+
+### Delete an event (replace 2 with actual ID)
+DELETE {{baseUrl}}/events/2
+Content-Type: {{contentType}}
+
+### Verify event was deleted
+GET {{baseUrl}}/events/2
+Content-Type: {{contentType}}
