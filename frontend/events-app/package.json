@@ -7,7 +7,7 @@
     "build": "vite build",
     "dev": "vite",
     "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint . --fix"
   },
   "dependencies": {
     "vue": "^3.5.12",
